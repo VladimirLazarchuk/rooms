@@ -1,0 +1,181 @@
+html{
+    height: 100%;
+}
+body{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+
+}
+.rtl{
+    direction: rtl;
+}
+.ltr{
+    direction: ltr;
+}
+
+app-root{
+    flex: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/*body.safari_browser{*/
+    /*display: -webkit-box;*/
+/*}*/
+/*.safari_browser app-root{*/
+        /*display:-webkit-box;*/
+/*}*/
+
+
+.modal-dialog{
+    width: 100%;
+    max-width: 800px!important;
+}
+.post_details_modal_hi_width{
+    max-width: 1175px!important;
+    width: 80%;
+}
+/*.post_details_modal_low_width{*/
+    /*max-width: 600px!important;*/
+/*}*/
+.modal_low_width{
+    max-width: 540px!important;
+}
+
+.progress{
+    background: white;
+    text-align: left;
+    transition: 0.3s;
+}
+.progress-bar{
+    background: #c5e1e6;
+    /*width: 100%;*/
+    height: 30px;
+    line-height: 30px;
+    color: #343a40;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/*.carousel-control-next,*/
+/*.carousel-control-prev{*/
+    /*height: 30px;*/
+    /*width: 40px;*/
+    /*!*transform: translateY(-50%);*!*/
+    /*top: auto;*/
+    /*bottom: 0;*/
+    /*background: rgba(0, 0, 0, 0.31);*/
+    /*z-index: 15;*/
+/*}*/
+.carousel-indicators{
+    bottom: auto;
+    top: 100%;
+    z-index: 1;
+    background: white!important;
+    height: 40px!important;
+}
+.carousel-indicators li{
+    width: 16px;
+    height: 16px;
+    border: 1px solid #00a7cf;
+    max-width: 16px;
+    border-radius: 50%;
+    background-color: #e6ecf0;
+}
+.carousel-indicators li.active{
+    background-color: #00a7cf;
+}
+app-post-details-main .slider_container{
+    height: 40vh;
+}
+app-post-details-main .picture{
+    min-height: 0;
+}
+
+
+@media screen and (max-width: 575px){
+    .modal-dialog{
+        margin: 30px auto 30px;
+    }
+}
+
+
+.cropper_field{
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+@media screen and (max-width: 550px){
+    .post_details_modal_hi_width{
+        margin: auto;
+        width: 100%;
+    }
+
+    app-header{
+        transition: 0.5s;
+
+    }
+    .opened{
+        margin-top: 143px;
+    }
+    .opened ~ app-all-rooms > .rooms_container{
+        height: calc(100vh - 175px);
+    }
+
+    .opened ~ app-inside-room > .component_wrapp{
+        height: calc(100vh - 175px);
+    }
+
+    .opened ~ app-about-user > .main_container{
+        height: calc(100vh - 175px);
+    }
+    .opened ~ app-notifications > .notifications_wrapp{
+        height: calc(100vh - 273px);
+    }
+
+    .opened ~ app-users-dialog > .main_container > .aside{
+        top: 175px!important;
+    }
+
+    .opened ~ app-user-settings > .main_container > .aside{
+        top: 175px!important;
+    }
+    .opened ~ app-user-settings app-muted-blocked .main_container {
+        max-height: calc(100vh - 327px);
+    }
+
+    .opened ~ app-room-settings > .main_container > .aside{
+        top: 175px!important;
+    }
+    .opened ~ app-room-settings  app-members-list  .main_container{
+        max-height: calc(100vh - 357px);
+    }
+    app-post-details-main  .picture{
+        min-height: 0;
+        /*min-height: 285px;*/
+    }
+    .opened ~ app-inside-room > app-post-details-main > .main_container  .scrollable_part{
+        height: calc(100vh - 309px);
+    }
+
+
+}
+.ng2-tag-input, .ng2-tag-input--focused{
+    border: 1px solid #e6ecf0!important;
+    border-radius: 5px;
+    padding: 7px 10px!important;
+}
+
+.ng2-tag-input.ng2-tag-input--focused{
+    border-bottom: 1px solid #e6ecf0!important;
+}
+tag{
+    background: #e6ecf0!important;
+    color: #868e96!important;
+    border-radius: 5px!important;
+}
+tag path{
+    fill: #868e96!important;
+
+}

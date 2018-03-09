@@ -1,0 +1,318 @@
+:host{
+  flex: auto;
+  margin-bottom: 30px;
+  @extend .flex-column;
+  background: white;
+  border: 1px solid $border_menu;
+
+}
+.first_message{
+  text-align: center;
+  padding: 15px;
+  font-size: 18px;
+  color: $gray_text;
+}
+.chat_and_form_wrapp{
+  width: 100%;
+  flex: auto;
+  @extend .flex-column;
+}
+.position_container{
+  position: relative;
+  flex: auto;
+}
+.messages_info{
+  height: 50px;
+  border-bottom: 1px solid $border_menu;
+  @extend .flex-center;
+  justify-content: flex-start;
+  padding: 0 10px;
+}
+.chat_wrapp{
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  border-radius: 5px;
+  padding: 30px;
+  background: white;
+  //transform: scaleY(-1);
+}
+.messages_container{
+  @extend .flex-column;
+  flex-direction: column-reverse;
+}
+.user_content_wrapp{
+  width: 100%;
+  @extend .flex-start;
+  margin-top: 5px;
+  //transform: scaleY(-1);
+}
+.user_info_wrapp{
+  @extend .flex-column;
+  align-items: center;
+  margin-right: 20px;
+}
+.user_avatar{
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  @extend .backgr-center;
+  background-color: $gray_text;
+  background-size: contain;
+  display: none;
+}
+.message_time{
+  color: $gray_text;
+  font-size: 11px;
+  width: 40px;
+  text-align: center;
+}
+.messages_wrapp{
+  @extend .flex-column;
+  align-items: flex-start;
+  padding: 16px 32px 16px 16px;
+  border-radius: 5px;
+  background: $line;
+  //box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+  border: 1px solid $border_menu;
+  border-top: none;
+  position: relative;
+  &:after{
+    content: '';
+    height: 0;
+    width: 0;
+    border-right: 20px solid $line;
+    border-bottom: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: -15px;
+    display: none;
+  }
+}
+.message{
+  color: $dark_text;
+  font-family: Arial, $font_regular;
+}
+
+
+.first{
+  .user_avatar{
+    display: block;
+  }
+  .messages_wrapp{
+    &:after{
+      display: block;
+    }
+  }
+  margin-top: 20px;
+}
+.my_messages{
+  flex-direction: row-reverse;
+  .user_info_wrapp{
+    margin-right: 0;
+    margin-left: 20px;
+  }
+  .user_avatar{
+    margin-right: 0;
+  }
+  .messages_wrapp{
+    order: 1;
+    align-items: flex-end;
+    background: $my_message;
+    color: white;
+    padding: 16px 16px 16px 32px;
+    &:after{
+      border-right: none;
+      border-left: 20px solid $my_message;
+      border-bottom: 10px solid transparent;
+      left: auto;
+      right: -15px;
+    }
+  }
+}
+.image{
+  display: block;
+  min-width: 350px;
+  height: 280px;
+  margin: 10px auto 5px;
+  border-radius: 5px;
+  @extend .backgr-center;
+  background-size: contain;
+}
+.preview{
+  margin: 10px auto 5px;
+  border-radius: 5px;
+  @extend .backgr-center;
+  background-size: contain;
+  min-width: 200px;
+  height: 150px;
+  font-size: 14px;
+  @extend .flex-column;
+  flex-direction: column-reverse;
+  text-decoration: none;
+  background-color: $border_menu;
+  &:hover{
+    text-decoration: none;
+  }
+}
+
+
+.link_title{
+  display: block;
+  width: 200px;
+  padding: 10px;
+  color: white;
+  background: rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.form{
+  padding: 20px;
+  margin: 0 30px 20px;
+  border-radius: 5px;
+  background: $line;
+  @extend .flex-between;
+  align-items: center;
+  border: 1px solid $border_menu;
+}
+.input_field{
+  border: 1px solid $border_menu;
+  border-radius: 5px;
+  padding: 10px;
+  flex: auto;
+  resize: none;
+  height: 46px;
+  transition: 0.5s;
+  &:focus{
+    height: 100px;
+  }
+}
+.add_button_wrapp{
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.add_button{
+  height: 100%;
+  width: 100%;
+  color: $blue;
+  font-size: 25px;
+  @extend .flex-center;
+  cursor: pointer;
+  background-size: cover;
+}
+.send_button{
+  height: 50px;
+  width: 50px;
+  color: $blue;
+  font-size: 25px;
+  cursor: pointer;
+  margin-left: 20px;
+  background: none;
+  border: none;
+  text-align: center;
+  &:before{
+    line-height: 50px;
+  }
+}
+.with_spinner > .add_button{
+  display: none;
+}
+
+.with_spinner{
+  &:before{
+    content: '';
+    background: center center no-repeat;
+    background-image: url('../../../img/spinner.gif');
+    display: block;
+    height: 50px;
+    width: 50px;
+    background-size: 60%;
+    z-index: 2;
+  }
+
+}
+.icon-trashcan{
+  position: absolute;
+  padding: 5px;
+  cursor: pointer;
+  top: 0;
+  right: auto;
+  left: 0;
+  display: none;
+  &:before{
+    transition: 0.5s;
+    color: $dark_text;
+  }
+  &:hover{
+    &:before{
+      color: $blue;
+    }
+  }
+}
+
+.my_messages{
+  &:hover  .icon-trashcan{
+  display: block;
+}
+
+}
+
+
+@media screen and (max-width: 1000px){
+
+
+}
+
+@media screen and (max-width: 550px){
+  .chat_wrapp{
+    padding: 10px;
+  }
+  .image{
+    height: 150px;
+    min-width: 150px;
+  }
+  .message{
+    font-size: 14px;
+    word-break: break-all;
+  }
+  .preview{
+    height: 150px;
+    min-width: 150px;
+  }
+  .link_title{
+    width: 150px;
+    font-size: 12px;
+  }
+  .form{
+    padding: 5px;
+    margin: 0 5px 5px;
+  }
+  .add_button_wrapp{
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+  }
+  .add_button{
+    font-size: 20px;
+  }
+  .input_field{
+    padding: 8px;
+    font-size: 14px;
+  }
+  .send_button{
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    margin-left: 5px;
+    display: block;
+    &:before{
+      line-height: 20px;
+    }
+  }
+}

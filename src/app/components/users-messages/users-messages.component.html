@@ -1,0 +1,58 @@
+<span class="first_message" *ngIf="!userWhoTalkToUs">{{'USER_MESSAGES.SELECT_CONVERS' | translate}}</span>
+<div class="chat_and_form_wrapp" *ngIf="showComponentBody">
+
+    <div class="position_container">
+        <div class="messages_info">
+                  <span class="user_info" [routerLink]="['/about-user', virtualUserFlag ? userWhoTalkToUs.user.user_id*22 : userWhoTalkToUs.user_id*22]">
+                    <span class="avatar" [ngStyle]="virtualUserFlag ? userWhoTalkToUs.user.thumbnail && {'background-image':'url(' + userWhoTalkToUs.user.thumbnail + ')' } :
+                     userWhoTalkToUs.thumbnail && {'background-image':'url(' + userWhoTalkToUs.thumbnail + ')' }" ></span>
+                    <span dir="auto" class="name">{{virtualUserFlag ? userWhoTalkToUs.user.display_name : userWhoTalkToUs.display_name}}</span>
+                </span>
+        </div>
+        <div class="chat_wrapp" appScroolEnd (scrollRichTheTop)="onScrollRichTheTop($event)" #chat_wrapp>
+
+            <div class="messages_container">
+                <!--[ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'last': !all_messages[i+1] || all_messages[i+1] && message.user_id !==  all_messages[i+1].user_id}">-->
+
+                <div class="user_content_wrapp" *ngFor="let message of all_messages; let i = index"
+                     [ngClass]="{'my_messages': message.user_id === loginnedUser.user_data.user_id, 'first': !all_messages[i+1] || all_messages[i+1] && message.user_id !==  all_messages[i+1].user_id}">
+                    <div class="user_info_wrapp">
+
+                        <span class="avatar user_avatar" [ngStyle]="message.avatar && {'background-image':'url(' + message.avatar + ')'}" [style.backgroundImage]="message.owner.thumbnail && 'url(' + message.owner.thumbnail + ')'" [routerLink]="['/about-user', message.owner.user_id*22]"></span>
+                        <span class="message_time">{{message.updated_at * 1000 | date: 'HH:mm'}}</span>
+                    </div>
+                    <div class="messages_wrapp">
+                        <span class="icon-trashcan" (click)="deleteMessage(message, i, message.user_id === loginnedUser.user_data.user_id)" ></span>
+                        <p dir="auto" class="message" [innerHTML]="message.text | asteriscReplace"></p>
+                        <span class="image" (click)="openLightBox(message.media)" *ngIf="message.has_media_flag" [ngStyle]="{'background-image':'url(' + message.media.thumbnail + ')' }"></span>
+
+                        <a class="preview" target="_blank" *ngFor="let preview of message.previews" [href]="preview.url" [ngStyle]="{'background-image':'url(' + preview.image + ')' }">
+                            <span class="link_title">{{preview.title}}</span>
+                            <span class="link_title">{{preview.url}}</span>
+                        </a>
+
+
+                    </div>
+                </div>
+
+                <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <form action="#" class="form" #messageForm="ngForm" (submit)="sendNewMessage(messageForm, $event)">
+        <input type="file" id="message_file"  name="files" (change)="fileDropped($event)" hidden>
+        <div class="add_button_wrapp" [ngClass]="{'with_spinner': inProcess}">
+            <label for="message_file" class="add_button icon-clip" [ngStyle]="{'background-image':'url(' + loaded_image_url + ')' }"></label>
+        </div>
+        <textarea dir="auto" class="input_field"  name="text" [(ngModel)]="textField" placeholder="Enter your message ..."></textarea>
+        <button type="submit" class="send_button icon-plane"></button>
+
+    </form>
+
+
+</div>

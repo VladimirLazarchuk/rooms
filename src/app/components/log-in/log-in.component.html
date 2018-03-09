@@ -1,0 +1,32 @@
+<div class="image"></div>
+<div class="form_wrapper">
+    <form action="#" class="form" #regForm="ngForm" (ngSubmit)="sendLogInData(regForm, $event)">
+        <p class="title">{{'LOGIN_AND_REGISTER.WELCOME' | translate}}<span class="title_bold">{{'LOGIN_AND_REGISTER.TIFO' | translate}}!</span></p>
+        <p class="subtitle">{{'LOGIN_AND_REGISTER.LOG_IN_TO' | translate}}</p>
+        <label class="input_wrapp icon-mail">
+            {{'LOGIN_AND_REGISTER.EMAIL' | translate}}
+            <input type="email" dir="auto" class="input_field" name="email" #inputEmail [(ngModel)]="email" required>
+        </label>
+        <label class="input_wrapp icon-lock">
+            {{'LOGIN_AND_REGISTER.PASSWORD' | translate}}
+            <input type="password" dir="auto" class="input_field" name="password" #inputPassword [(ngModel)]="password"  required>
+        </label>
+        <button type="submit" [ngClass]="{'disabled_button': regForm.invalid}" class="form_button" [disabled]="regForm.invalid">Log in</button>
+
+        <p class="link_prew">{{'LOGIN_AND_REGISTER.HAVE_ACCOUNT' | translate}}?<span class="link_to" [routerLink]="'/registration'">{{'LOGIN_AND_REGISTER.SIGN_UP' | translate}}</span></p>
+        <p class="link_prew">{{'LOGIN_AND_REGISTER.FORGOT_PASSWORD' | translate}}?<span class="link_to" [routerLink]="'/password-recovery'">{{'LOGIN_AND_REGISTER.RECOVERY' | translate}}</span></p>
+    </form>
+    <div class="footer_wrapper">
+        <div class="links_wrap">
+            <a href="#" class="app_links apple"></a>
+            <a href="#" class="app_links android"></a>
+        </div>
+        <footer class="form_footer">
+            <span class="link" [routerLink]="'/about'">{{'COMMON.ABOUT_US' | translate}}</span>
+            <span class="link" [routerLink]="'/support'">{{'COMMON.SUPPORT' | translate}}</span>
+            <span class="link" [routerLink]="'/privacy'">{{'COMMON.PRIVACY' | translate}}</span>
+            <span class="link" [routerLink]="'/term'">{{'COMMON.TERMS' | translate}}</span>
+        </footer>
+    </div>
+</div>
+

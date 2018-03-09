@@ -1,0 +1,232 @@
+
+@font-face {
+  font-family: 'Bold';
+  src: url('../fonts/sfuitext-bold-webfont.woff2') format('woff2'),
+  url('../fonts/sfuitext-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'Medium';
+  src: url('../fonts/sfuitext-medium-webfont.woff2') format('woff2'),
+  url('../fonts/sfuitext-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'Regular';
+  src: url('../fonts/sfuitext-regular-webfont.woff2') format('woff2'),
+  url('../fonts/sfuitext-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'LatoRegular';
+  src: url('../fonts/lato-regular-webfont.woff2') format('woff2'),
+  url('../fonts/lato-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'LoraRegular';
+  src: url('../fonts/lora-regular-webfont.woff2') format('woff2'),
+  url('../fonts/lora-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../icons/icomoon.eot?b7fxrm');
+  src:  url('../icons/icomoon.eot?b7fxrm#iefix') format('embedded-opentype'),
+  url('../icons/icomoon.ttf?b7fxrm') format('truetype'),
+  url('../icons/icomoon.woff?b7fxrm') format('woff'),
+  url('../icons/icomoon.svg?b7fxrm#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before,
+[class^="icon-"]:after, [class*=" icon-"]:after{
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-enter:before {
+  content: "\e900";
+}
+.icon-move-right:before {
+  content: "\e901";
+}
+.icon-trashcan:before {
+  content: "\e902";
+}
+.icon-clip:before {
+  content: "\e903";
+}
+.icon-pencil:before {
+  content: "\e904";
+}
+.icon-download:before {
+  content: "\e905";
+}
+.icon-bubble:before {
+  content: "\e906";
+}
+.icon-users:before {
+  content: "\e907";
+}
+.icon-gear:before {
+  content: "\e908";
+}
+.icon-flag:before {
+  content: "\e909";
+}
+.icon-eye-blocked:before {
+  content: "\e90a";
+}
+.icon-star-empty:before {
+  content: "\e90b";
+}
+.icon-star-full:before {
+  content: "\e90c";
+}
+.icon-plus:before {
+  content: "\e90d";
+}
+.icon-checkmark:before {
+  content: "\e90e";
+}
+.icon-mute:before {
+  content: "\e90f";
+}
+.icon-room-in:before {
+  content: "\e910";
+}
+.icon-room-out:before {
+  content: "\e911";
+}
+.icon-chart:before {
+  content: "\e912";
+}
+.icon-cancel:before {
+  content: "\e913";
+}
+.icon-calendar:before {
+  content: "\e914";
+}
+.icon-search:before {
+  content: "\e915";
+}
+.icon-eye:before {
+  content: "\e916";
+}
+.icon-lock:before {
+  content: "\e917";
+}
+.icon-mail:before {
+  content: "\e918";
+}
+.icon-binocular:before {
+  content: "\e919";
+}
+.icon-double-left:before {
+  content: "\e91a";
+}
+.icon-filter:before {
+  content: "\e91b";
+}
+.icon-edit:before {
+  content: "\e91c";
+}
+.icon-bullhorn:before {
+  content: "\e91d";
+}
+.icon-user-o:before {
+  content: "\e91e";
+}
+.icon-sign-in:before {
+  content: "\e91f";
+}
+.icon-envelope-o:before {
+  content: "\e920";
+}
+.icon-comment-o:before {
+  content: "\e921";
+}
+.icon-thumbs:before {
+  content: "\e922";
+}
+.icon-home:before {
+  content: "\e923";
+}
+.icon-question:before {
+  content: "\e924";
+}
+.icon-play-circle:before {
+  content: "\e925";
+}
+.icon-ban:before {
+  content: "\e926";
+}
+.icon-plane:before {
+  content: "\e927";
+}
+.icon-image:before {
+  content: "\e928";
+}
+.icon-heart-o:before {
+  content: "\e929";
+}
+.icon-heart:before {
+  content: "\e92a";
+}
+.icon-bell-o:before {
+  content: "\e92b";
+}
+.icon-comments:before {
+  content: "\e92c";
+}
+.icon-earth:before {
+  content: "\e92d";
+}
+.icon-chevron-right:before {
+  content: "\e92e";
+}
+.icon-chevron-left:before {
+  content: "\e92f";
+}
+.icon-menu:before {
+  content: "\e930";
+}
+.icon-microphone:before {
+  content: "\e931";
+}
+.icon-circle-check:before {
+  content: "\e932";
+}
+.icon-square-check:before {
+  content: "\e933";
+}
+.icon-head:before {
+  content: "\e934";
+}

@@ -1,0 +1,305 @@
+$light_gray: #f8f9fa;
+$light_blue: #ecf6fb;
+$orange: #ecb255;
+$blue: #00a7cf ;
+$red: #c4205b;
+$red_dot: #fa5252;
+$gray_text: #868e96;
+$dark_text: #343a40;
+$background: #fef9f2;
+$posts_background: #f1f3f5;
+$tags_active: #47a9d4;
+$line: #f1f3f5;
+$gray_background: #dee2e6;
+$green: green;
+$poll_background: #c5e1e6;
+$border_menu: #e6ecf0;
+$my_message: #d3f7ff;
+$tags_about: #2694ae;
+
+$font_regular: Regular, sans-serif;
+$font_medium: Medium, sans-serif;
+$font_bold: Bold, sans-serif;
+$font_lato: LatoRegular, sans-serif;
+$font_lora: LoraRegular, serif;
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+  &:focus{
+    outline: none;
+  }
+}
+
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.flex-around{
+  display: flex;
+  justify-content: space-around;
+}
+.flex-column{
+  display: flex;
+  flex-direction: column;
+}
+.flex-start{
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.flex-default{
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.backgr-center{
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+.main_container{
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.disabled{
+  background: $gray_text!important;
+  pointer-events: none;
+}
+.room_settings_header{
+  min-height: 60px;
+  background: $blue;
+  color: white;
+  @extend .flex-center;
+  font-size: 24px;
+  cursor: pointer;
+  position: relative;
+  &:before{
+    display: block;
+    margin-right: 10px;
+  }
+}
+
+.user_info{
+  @extend .flex-center;
+  cursor: pointer;
+  //default avatar image added in app.component.scss
+  .avatar{
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    @extend .backgr-center;
+    background-color: $gray_text;
+    margin-right: 10px;
+    background-size: contain;
+  }
+  .name{
+    color: $gray_text;
+    font-family: $font_medium;
+    font-size: 14px;
+  }
+}
+
+.dots_wrapp{
+  @extend .flex-center;
+  padding: 5px 0;
+  transition: 0.3s;
+  .dots{
+    height: 6px;
+    width: 6px;
+    background: $gray_text;
+    border: 2px solid $gray_text;
+    border-radius: 50%;
+    display: block;
+    margin-right: 7px;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+
+}
+.drop_down_container{
+  position: relative;
+  cursor: pointer;
+  &:hover > .drop_down_menu{
+    display: block;
+  }
+  &.dd_opened > .drop_down_menu{
+    display: block;
+  }
+
+
+}
+.drop_down_menu{
+  position: absolute;
+  top: 120%;
+  left: -153px;
+  width: 200px;
+  background: white;
+  display: none;
+  box-shadow: 3px 3px 3px 0 rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  border-top: 1px solid $line;
+}
+
+.drop_down_item{
+  position: relative;
+  border-bottom: 1px solid $line;
+  list-style: none;
+  cursor: pointer;
+  &:first-child{
+    border-top: none;
+  }
+  &:last-child{
+    border-bottom: none;
+  }
+  &:hover{
+
+  }
+}
+
+.drop_down_fill{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  color: $gray_text;
+  transition: 0.3s;
+  &:hover{
+    color: white;
+    background: $blue;
+  }
+  &:before{
+    margin-right: 10px;
+  }
+}
+.triangle{
+  display: block;
+  width: 100%;
+  height: 0;
+  position: relative;
+  &:before{
+    content: '';
+    border-bottom: 10px solid $line;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &:after{
+    content: '';
+    border-bottom: 10px solid white;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .trans_bar{
+    content: '';
+    height: 15px;
+    width: 100%;
+    background: transparent;
+    position: absolute;
+    top: -15px;
+    left: 0;
+  }
+}
+.ps-container>.ps-scrollbar-y-rail>.ps-scrollbar-y{
+  background: $blue;
+}
+.ps-container:hover>.ps-scrollbar-y-rail:hover>.ps-scrollbar-y{
+  background: $blue;
+}
+.loading{
+  padding: 30px;
+  text-align: center;
+  animation: blink 1.5s linear infinite;
+  color: $dark_text;
+  font-size: 15px;
+  display: block;
+  width: 100%;
+}
+@keyframes blink {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.prev_link{
+  text-decoration: none;
+  &:hover{
+    text-decoration: none;
+  }
+  &:visited{
+    text-decoration: none;
+  }
+}
+
+@media screen and (max-width: 1190px){
+  .main_container{
+    padding: 0 15px;
+  }
+}
+
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  body{
+    min-height: 100vh;
+    height: 100%;
+  }
+}
+
+
+.bold_text{
+  font-family: $font_bold;
+  color: black;
+}
+.active{
+  .bold_text{
+    font-family: $font_bold;
+    color: white;
+  }
+}
+.user_bar{
+  &:hover .bold_text{
+    font-family: $font_bold;
+    color: white;
+  }
+}
+
+.show_host{
+  height: calc(100vh - 60px);
+  @extend .flex-column;
+}
+
+@media screen and (max-width: 1000px){
+  .show_host{
+    height: calc(100vh - 114px);
+  }
+}
+
+@media screen and (max-width: 550px){
+  .show_host{
+    transition: 0.5s;
+    height: 100vh
+  }
+  .opened ~ app-inside-room > .show_host{
+    height: calc(100vh - 143px);
+  }
+  .opened ~ app-inside-room > .post_content{
+
+  }
+
+}

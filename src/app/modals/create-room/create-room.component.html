@@ -1,0 +1,52 @@
+<form action="#" class="modal_wrapper" #newRoomForm="ngForm" (submit)="createNewRoom(newRoomForm, $event)">
+  <span class="icon-cancel" (click)="activeModal.dismiss()"></span>
+  <div class="top_wrapper">
+    <h3 class="title">{{'CREATE_ROOM.NEW_ROOM' | translate}}</h3>
+  </div>
+  <div class="main_wrapper">
+
+    <div class="image_cropper_wrapp">
+      <img-cropper #cropper [image]="added_image" [settings]="cropperSettings"></img-cropper>
+      <img [src]="added_image.image" #previewImg class="image_preview"  *ngIf="added_image.image" >
+      <input type="file" id="input_file" name="files" (change)="fileDropped($event)" hidden>
+      <label for="input_file" class="room_thumbnail icon-image" [ngClass]="{'image_dropped': image_dropped}">
+      </label>
+    </div>
+
+
+    <div class="right_zone_wrapper">
+      <span class="input_wrapp ">
+        {{'COMMON.TITLE' | translate}}:
+        <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_ROOM.ENTER_NAME' | translate}}" name="room_name" [(ngModel)]="roomName"  minlength="3" maxlength="20" required >
+        <span class="mistake">{{'CREATE_ROOM.WRONG_NAME' | translate}}</span>
+      </span>
+
+      <div class="input_wrapp with_margin">
+        {{'COMMON.DESCRIPT' | translate}}:
+        <textarea dir="auto" class="input_field room_description" placeholder="{{'CREATE_ROOM.ENTER_DESCRIPT' | translate}}" name="room_desc" [(ngModel)]="roomDeskription"  maxlength="250"></textarea>
+      </div>
+      <div class="input_wrapp with_margin">
+        {{'CREATE_ROOM.TIFO_TAGS' | translate}}:
+        <tag-input [(ngModel)]='tags' name="mod_name"  [maxItems]="6" [addOnBlur]="true" [addOnPaste]="true" [separatorKeyCodes]="[32]" [placeholder]="'CREATE_ROOM.TAP_TAGS' | translate" [secondaryPlaceholder]="'CREATE_ROOM.TAP_TAGS' | translate"></tag-input>
+      </div>
+
+      <div class="input_wrapp with_margin">
+        {{'CREATE_ROOM.TIFO_TYPE' | translate}}:
+        <div class="toggle_wrapper">
+          <span class="toggle_name">{{'COMMON.PUBLIC' | translate}}</span>
+          <input type="checkbox" id="private" class="toggle_input" name="public"  [(ngModel)]="publicFlag" checked hidden>
+          <label for="private" class="toggle_field"></label>
+        </div>
+        <div class="toggle_wrapper">
+          <span class="toggle_name">{{'COMMON.SEARCHABLE' | translate}}</span>
+          <input type="checkbox" id="searchable" class="toggle_input" name="searchable_flag" [(ngModel)]="searchableFlag" checked hidden>
+          <label for="searchable" class="toggle_field"></label>
+        </div>
+      </div>
+
+      <button type="submit" class="form_button" [disabled]="newRoomForm.invalid">{{'CREATE_ROOM.CREATE' | translate}}</button>
+
+    </div>
+
+  </div>
+</form>

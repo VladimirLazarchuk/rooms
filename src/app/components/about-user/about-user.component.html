@@ -1,0 +1,54 @@
+
+
+<div class="main_container" appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)">
+
+  <div class="user_info_wrapp" *ngIf="currentUser">
+    <div class="avatar_name_wrapp">
+      <div class="avatar_and_drop">
+        <span class="avatar" [ngStyle]="currentUser.thumbnail && {'background-image':'url(' + currentUser.thumbnail + ')'}"></span>
+          <div class="drop_down_container" *ngIf="!currentUser.is_myne">
+            <div class="dots_wrapp">
+              <i class="dots"></i>
+              <i class="dots"></i>
+              <i class="dots"></i>
+            </div>
+            <ul class="drop_down_menu" >
+              <li class="triangle"><i class="trans_bar"></i></li>
+
+              <li class="drop_down_item"
+                  (click)="userInterraction('mute')">
+                <span class="drop_down_fill icon-mute">{{'COMMON.MUTE_USER' | translate}}</span>
+              </li>
+
+              <li class="drop_down_item"
+                  (click)="userInterraction('block')">
+                <span class="drop_down_fill icon-eye-blocked">{{'COMMON.BLOCK_USER' | translate}}</span>
+              </li>
+
+            </ul>
+          </div>
+
+
+      </div>
+      <span dir="auto" class="name">{{currentUser.display_name}}<span class="displayed_name">@{{currentUser.user_name}}</span></span>
+
+    </div>
+    <p dir="auto" class="about_user">{{currentUser.about}}</p>
+    <div class="buttons_wrapp">
+      <span class="button icon-star-empty" [ngClass]="{'icon-star-full': currentUser.is_fave}" (click)="faveAndUnfave(currentUser.is_myne)" *ngIf="!currentUser.is_myne"></span>
+      <span class="button icon-gear" [routerLink]="'/user-settings'"   *ngIf="currentUser.is_myne"></span>
+      <span class="button icon-comments" (click)="goToPrivateDialog(currentUser.is_myne || !currentUser.msg_from_anyone && !currentUser.is_fan)"
+            [ngClass]="{'disabled': !currentUser.msg_from_anyone && !currentUser.is_fan}" *ngIf="!currentUser.is_myne"></span>
+    </div>
+  </div>
+
+  <div class="tags_wrapp" *ngIf="currentUser">
+   <!--ng class is hack for router. Active class not add when routing goes prom profile to another profile-->
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-tifos']" routerLinkActive="active" [ngClass]="{'active': router.url === '/about-user/' + user_id*22 + '/user-tifos'}">{{'ABOUT_USER.TIFOS' | translate}} <span>({{currentUser.rooms_count}})</span></span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-posts']" routerLinkActive="active">{{'ABOUT_USER.POSTS' | translate}} <span>({{currentUser.posts_count}})</span></span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-fans']" routerLinkActive="active">{{'ABOUT_USER.FANS' | translate}} <span>({{currentUser.fans_count}})</span></span>
+    <span class="tags" [routerLink]="['/about-user/' + user_id*22 + '/user-faves']" routerLinkActive="active">{{'ABOUT_USER.FAVS' | translate}} <span>({{currentUser.faves_count}})</span></span>
+  </div>
+
+  <router-outlet></router-outlet>
+</div>

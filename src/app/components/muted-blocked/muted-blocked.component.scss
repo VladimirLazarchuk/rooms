@@ -1,0 +1,27 @@
+@import '../../../scss/base';
+@import '../../../scss/members_list';
+
+.main_container{
+  max-height: calc(100vh - 215px);
+  overflow-y: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+@media screen and (max-width: 1000px){
+  .main_container{
+    max-height: calc(100vh - 269px);
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 550px){
+  .main_container{
+    max-height: calc(100vh - 184px);
+    justify-content: center;
+    transition: 0.5s;
+  }
+}

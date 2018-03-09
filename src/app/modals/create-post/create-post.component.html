@@ -1,0 +1,65 @@
+<form class="modal_wrapper" #postForm="ngForm" (submit)="createNewPost(postForm, $event)">
+  <span class="icon-cancel" (click)="activeModal.dismiss()"></span>
+  <div class="top_wrapper">
+    <h3 class="title">{{'CREATE_POST.NEW_POST' | translate}}</h3>
+    <label class="toggle_wrapp">
+      <input type="checkbox" class="toggler" name="mod_type" id="mod_type" [(ngModel)]="viewToggle" checked hidden>
+      <i class="toggle_icon icon-clip"></i>
+      <i class="toggle_icon icon-chart"></i>
+    </label>
+  </div>
+  <div class="main_wrapper">
+    <textarea name="text" dir="auto" [(ngModel)]="textField"  class="text_field" placeholder="{{'CREATE_POST.TYPE_HERE' | translate}}"></textarea>
+
+    <div class="right_zone_wrapper" *ngIf="viewToggle">
+      <div class="dropzone" fileDrop (onFileDrop)="onFileDrop($event)">
+        <input type="file" id="input_file" name="files" [disabled]="mediaToAppServer.length >= 4" (change)="fileDropped($event)" hidden>
+        <label for="input_file" class="file_button">
+          {{'CREATE_POST.CLICK_TO_UPLOAD' | translate}}
+        </label>
+        <span class="drag_zone_text">{{'CREATE_POST.ALLOWED_TYPES' | translate}}: png, bmp, gif, jpg, jpeg, pdf, mp4, mp3, m4a, wav, ppt, pptx, xls, xlsx, doc, docx</span>
+      </div>
+     <div class="preview_wrapp">
+       <span class="images" *ngFor="let imgObj of mediaToAppServer; let i = index" [ngClass]="{'with_spinner': !imgObj.uploaded}" [ngStyle]="{'background-image':'url(' + imgObj.img_src + ')'}">
+         <i class="delete icon-cancel" (click)="deletePreviewedImg(i)"></i>
+       </span>
+     </div>
+    </div>
+
+    <div class="right_zone_wrapper" *ngIf="!viewToggle">
+      <span class="input_wrapp ">
+        {{'CREATE_POST.QUESTION' | translate}}:
+        <input type="text" dir="auto" class="input_field" placeholder=" {{'CREATE_POST.ENTER_QUESTION' | translate}}" [(ngModel)]="question" name="question" required>
+      </span>
+
+     <div class="input_wrapp with_margin">
+       {{'CREATE_POST.CHOISES' | translate}}:
+       <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #1" name="choice1" [(ngModel)]="choice_1" required>
+       <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #2" name="choice2" [(ngModel)]="choice_2" required>
+       <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #3" name="choice3" [(ngModel)]="choice_3">
+       <input type="text" dir="auto" class="input_field" placeholder="{{'CREATE_POST.ENTER_CHOISE' | translate}} #4" name="choice4" [(ngModel)]="choice_4">
+     </div>
+      <div class="input_wrapp with_margin">
+        {{'CREATE_POST.POLL_DURATION' | translate}}:
+        <div class="duration_wrapp">
+          <input type="radio" name="duration" [value]="1" class="radio" [(ngModel)]="duration_model" id="radio1" hidden>
+          <label class="duration_button" for="radio1">1</label>
+          <input type="radio" name="duration" [value]="2" class="radio" [(ngModel)]="duration_model" id="radio2" hidden>
+          <label class="duration_button" for="radio2">2</label>
+          <input type="radio" name="duration" [value]="3" class="radio" [(ngModel)]="duration_model" id="radio3" hidden>
+          <label class="duration_button" for="radio3">3</label>
+          <input type="radio" name="duration" [value]="4" class="radio" [(ngModel)]="duration_model" id="radio4" hidden>
+          <label class="duration_button" for="radio4">4</label>
+          <input type="radio" name="duration" [value]="5" class="radio" [(ngModel)]=duration_model id="radio5" hidden>
+          <label class="duration_button" for="radio5">5</label>
+          <input type="radio" name="duration" [value]="6" class="radio" [(ngModel)]=duration_model id="radio6" hidden>
+          <label class="duration_button" for="radio6">6</label>
+          <input type="radio" name="duration" [value]="7" class="radio" [(ngModel)]=duration_model id="radio7" hidden>
+          <label class="duration_button" for="radio7">7</label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <button type="submit" class="form_button" [disabled]="postForm.invalid || disable_while_upload">{{'CREATE_POST.CREATE' | translate}}</button>
+</form>

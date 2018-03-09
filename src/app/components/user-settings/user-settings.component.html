@@ -1,0 +1,21 @@
+<div class="room_settings_header"> <label for="navigation_menu_toggle" class="show_menu_label outside icon-menu" ></label>{{'USER_SETTINGS.PROFILE_SETTINGS' | translate}}</div>
+<div class="main_container" appIeHeight>
+  <input type="checkbox" id="navigation_menu_toggle" [(ngModel)]="menu_state_toggle" hidden>
+  <aside class="aside">
+    <div class="label_wrapp">
+      <label for="navigation_menu_toggle" class="show_menu_label inside icon-double-left" ></label>
+    </div>
+    <ul class="aside_content">
+      <li class="aside_items aside_items_title">{{'USER_SETTINGS.USER_MENU' | translate}}</li>
+      <li class="aside_items" [routerLink]="'/user-settings/edit-profile'" routerLinkActive="active">{{'USER_SETTINGS.EDIT_PROFILE' | translate}}</li>
+      <li class="aside_items" [routerLink]="'/user-settings/muted-blocked'" routerLinkActive="active">{{'USER_SETTINGS.MUTED_BLOCKED' | translate}}</li>
+      <li class="aside_items" [routerLink]="'/user-settings/change-password'" routerLinkActive="active">{{'USER_SETTINGS.CHANGE_PASSWORD' | translate}}</li>
+      <li class="aside_items" [routerLink]="'/user-settings/notifications-settings'" routerLinkActive="active">{{'USER_SETTINGS.NOTIF_SETT' | translate}}</li>
+
+    </ul>
+  </aside>
+
+  <div class="main_field">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+:host {
+  flex: auto;
+  width: 100%;
+  background: $posts_background;
+  color: $gray_text;
+  position: relative;
+}
+  .rooms_container{
+    @extend .flex-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .rooms{
+    height: 255px;
+    width: 255px;
+    border-radius: 5px;
+    margin: 30px 10px 0;
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    @extend .flex-column;
+      background-color: transparent;
+      background-size: cover;
+    transition: 0.5s;
+    &:hover{
+      box-shadow: 2px 4px 1px 0 rgba(0, 0, 0, 0.3);
+
+    }
+  }
+  //.image{
+  //  height: 255px;
+  //  width: 100%;
+  //  border-radius: 5px 5px 0 0;
+  //  @extend .backgr-center;
+  //  background-color: transparent;
+  //  background-size: cover;
+  //}
+  .room_info{
+    padding: 15px;
+    color: $gray_text;
+    //@extend .flex-column;
+    font-size: 14px;
+    background: white;
+    @extend .flex-default;
+    border-radius: 0 0 5px 5px;
+  }
+  .room_name{
+    font-size: 20px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: $font_lato;
+    padding: 10px 8px;
+    width: 100%;
+    margin-top: auto;
+    color: white;
+    background: rgba(0, 0, 0, 0.2);
+  }
+  .views,
+  .members{
+    @extend .flex-center;
+    justify-content: flex-start;
+    &:before{
+      color: $gray_text;
+      margin-right: 5px;
+      font-size: 16px;
+    }
+  }
+.views{
+  margin-left: 15px;
+  &:before{
+    font-size: 20px;
+}
+}
+
+.add_post{
+  position: fixed;
+  bottom: 30px;
+  right: 25px;
+  height: 66px;
+  width: 66px;
+  border-radius: 5px;
+  background: $blue;
+
+  color: white;
+  font-size: 30px;
+  @extend .flex-center;
+  cursor: pointer;
+  z-index: 3;
+  &:hover{
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  }
+  &:active{
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 1000px){
+  .rooms_container{
+    height: calc(100vh - 114px);
+  }
+}
+@media screen and (max-width: 875px){
+  .rooms_container{
+    justify-content: center;
+  }
+}
+
+
+
+@media screen and (max-width: 550px){
+  .rooms_container{
+    height: calc(100vh - 32px);
+    transition: 0.5s;
+  }
+}

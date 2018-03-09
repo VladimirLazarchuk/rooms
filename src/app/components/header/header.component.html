@@ -1,0 +1,125 @@
+<input type="checkbox" id="header_opener" [(ngModel)]="header_opener_mod" (change)="addHeaderClass(header_opener_mod)" hidden>
+<header class="header" >
+  <div class="main_container">
+    <div class="logo" >
+      <span class="logo_link" [routerLink]="'/about'"></span>
+      <span class="header_link icon-home" [routerLink]="'/my-tifos'" routerLinkActive="active">{{'HEADER.MY_TIFOS' | translate}}</span>
+      <span class="header_link icon-binocular" [routerLink]="'/explore'" routerLinkActive="active"   >{{'HEADER.EXPLORE' | translate}}</span>
+    </div>
+    <div class="search">
+      <input type="text" dir="auto" class="search_field" placeholder="{{'HEADER.SEARCH' | translate}}" [(ngModel)]="room_search" >
+      <span class="icon-search" (click)="doRoomSearch(room_search)"></span>
+    </div>
+
+
+    <div class="icons_wrapper" *ngIf="currentUser.token !== 'guest'">
+
+      <div class="drop_down_container new_messages" >
+        <span class="icon-mail" [ngClass]="{'new_events': messages_quantity}" [routerLink]="'/user-dialogs'"></span>
+
+          <ul class="drop_down_menu" >
+            <li class="triangle"><i class="trans_bar"></i></li>
+            <li class="drop_down_item user_bar" *ngFor="let message of messages" (click)="goToDialogPage(message)">
+
+                <span class="avatar" [ngStyle]="message.user.thumbnail && {'background-image':'url(' + message.user.thumbnail + ')' }"></span>
+
+                <div class="user_name_and_date" >
+                <span class="top_wrapp">
+                    <span class="name">{{message.user.user_name}}</span>
+                    <span class="date">{{message.updated_at * 1000 | timeAgo }}</span>
+                </span>
+                  <p class="text" [innerHTML]="message.text | asteriscReplace: 'HEADER.MEDIA_MESSAGE' | translate"></p>
+                </div>
+
+            </li>
+            <li class="see_all_messages" *ngIf="!messages_quantity" [routerLink]="'/user-dialogs'">{{'HEADER.NO_NEW_MESSAGES' | translate}}</li>
+            <li class="see_all_messages" *ngIf="messages_quantity > 5" [routerLink]="'/user-dialogs'">{{'HEADER.SEE_ALL_MESSAGES' | translate}}</li>
+
+          </ul>
+
+      </div>
+
+
+
+      <div class="drop_down_container new_notifications" >
+        <span class="icon-bell-o" [ngClass]="{'new_events': notifications_quantity}" [routerLink]="'/notifications'"></span>
+
+        <ul class="drop_down_menu" >
+          <!--<li class="drop_down_item drop_down_title messages_title">-->
+            <!--Notifications <span class="messages_quantity" *ngIf=" notifications_quantity">{{1  + ' - ' + notifications.length + ' of ' + notifications_quantity}}</span>-->
+          <!--</li>-->
+          <li class="triangle"><i class="trans_bar"></i></li>
+          <li class="drop_down_item user_bar" *ngFor="let notification of notifications">
+
+            <span class="avatar" [ngStyle]="notification.data.details.user.thumbnail && {'background-image':'url(' + notification.data.details.user.thumbnail + ')' }"></span>
+            <div class="notification_data">
+              <span class="name" [ngClass]="{'icon-heart-o': notification.type === 'PostLikeNotification', 'icon-comment-o':
+                notification.type === 'CommentNotification', 'icon-star-empty': notification.type === 'FavedNotification', 'icon-envelope-o':
+                notification.type === 'MessageNotification', 'icon-enter': notification.type === 'RoomJoinRequestNotification', 'icon-user-o':
+                notification.type === 'JoinedRoomNotification', 'icon-gear': notification.type === 'AddedModeratorNotification', 'icon-bullhorn':
+                notification.type === 'AddedTalkerNotification', 'icon-edit': notification.type === 'PostInRoomNotification'}">{{notification.data.details.user.display_name}}</span>
+
+              <p class="text">{{notification.type === 'PostLikeNotification' && 'Liked your post' ||
+                notification.type === 'CommentNotification' && 'Made new comment' || notification.type === 'FavedNotification' && 'Became your fan' ||
+                notification.type === 'MessageNotification' && 'Sent you a message' || notification.type === 'RoomJoinRequestNotification' && 'Want join to your room' ||
+                notification.type === 'JoinedRoomNotification' && 'Joined your room' || notification.type === 'AddedModeratorNotification' && 'Added as moderator' ||
+                notification.type === 'AddedTalkerNotification' && 'Added as talker' || notification.type === 'PostInRoomNotification' && 'Made new post'}}</p>
+                <span class="date">{{notification.created_at * 1000 |  date: 'dd MMM y'}}</span>
+            </div>
+
+
+          </li>
+          <li class="see_all_messages" *ngIf="!notifications_quantity" [routerLink]="'/notifications'">{{'HEADER.NO_NEW_NOTIFICATIONS' | translate}}</li>
+          <li class="see_all_messages" *ngIf="notifications_quantity > 5" [routerLink]="'/notifications'">{{'HEADER.SEE_ALL_ACTIVITY' | translate}}</li>
+
+        </ul>
+
+      </div>
+
+
+
+      <div class="user_info drop_down_container" onclick="">
+                <span class="avatar" [ngStyle]="currentUser.user_data.thumbnail && {'background-image': 'url(' + currentUser.user_data.thumbnail + ')'}"></span>
+                <span class="name">{{currentUser.user_data.user_name}}</span>
+
+
+        <ul class="drop_down_menu">
+          <li class="triangle"><i class="trans_bar"></i></li>
+          <li class="drop_down_item" >
+            <span class="drop_down_fill" [routerLink]="['/about-user', currentUser.user_data.user_id * 22]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'HEADER.PROFILE' | translate}}</span>
+          </li>
+          <li class="drop_down_item">
+            <span class="drop_down_fill" [routerLink]="'/user-settings'" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">{{'HEADER.SETTINGS' | translate}}</span>
+          </li>
+          <li class="drop_down_item">
+            <span class="drop_down_fill" (click)="logOut()">{{'HEADER.LOGOUT' | translate}}</span>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="select_wrapp">
+        <select name="languages" class="lang_select"  #headerLangSelect (change)="translate.use(headerLangSelect.value)">
+          <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">{{language}}</option>
+        </select>
+      </div>
+
+    </div>
+
+
+    <div class="icons_wrapper" *ngIf="currentUser.token === 'guest'">
+      <span class="reg_log_buttons" [routerLink]="'/login'">{{'HEADER.LOGIN' | translate}}</span>
+      <span class="reg_log_buttons" [routerLink]="'/registration'">{{'HEADER.REGISTER' | translate}}</span>
+
+      <div class="select_wrapp">
+        <select name="languages" class="lang_select"  #headerLangSelect (change)="translate.use(headerLangSelect.value)">
+          <option *ngFor="let language of translate.getLangs()" [value]="language" [selected]="language === translate.currentLang">{{language}}</option>
+        </select>
+      </div>
+    </div>
+
+    <label for="header_opener" class="open_header icon-double-left"></label>
+
+
+  </div>
+</header>

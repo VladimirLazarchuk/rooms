@@ -1,0 +1,10 @@
+@import '../../../scss/base';
+@import '../../../scss/all_rooms';
+
+:host{
+  margin-top: 0;
+}
+.rooms_container{
+  height: auto;
+  margin-top: 0;
+}

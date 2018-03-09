@@ -1,0 +1,27 @@
+<div class="room_settings_header"   *ngIf="currentRoom">
+    <label for="navigation_menu_toggle" class="show_menu_label outside icon-menu" ></label>
+    <div class="link_holder  icon-chevron-left" title="{{'COMMON.BACK_TO_TIFO' | translate}}!" [routerLink]="['/tifo', currentRoom.room_details.room_alias]">{{currentRoom.room_details.room_name}}</div>
+    </div>
+<div class="main_container">
+    <input type="checkbox" id="navigation_menu_toggle" [(ngModel)]="menu_state_toggle" hidden>
+    <aside class="aside">
+        <div class="label_wrapp">
+            <label for="navigation_menu_toggle" class="show_menu_label inside icon-double-left"></label>
+        </div>
+        <ul class="aside_content">
+            <li class="aside_items aside_items_title">{{'ROOM_SETTINGS.MEMBERS' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/members-list'" routerLinkActive="active">{{'ROOM_SETTINGS.MEMBERSHIP' | translate}}</li>
+            <li class="aside_items aside_items_title">{{'ROOM_SETTINGS.WALLS' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/add-wall'" routerLinkActive="active">{{'ROOM_SETTINGS.ADD_WALL' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/walls-list'" routerLinkActive="active">{{'ROOM_SETTINGS.EDIT_WALLS' | translate}}</li>
+            <li class="aside_items aside_items_title">{{'ROOM_SETTINGS.TIFO' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/edit-tifo'" routerLinkActive="active">{{'ROOM_SETTINGS.EDIT_TIFO' | translate}}</li>
+            <li class="aside_items" [routerLink]="'/tifo-settings/delete-tifo'" routerLinkActive="active">{{'ROOM_SETTINGS.DELETE_TIFO' | translate}}</li>
+        </ul>
+    </aside>
+
+    <div class="main_field">
+        <router-outlet></router-outlet>
+    </div>
+</div>
+

@@ -1,0 +1,41 @@
+<div class="modal_wrapper">
+  <div class="top_wrapper">
+    <h3 dir="auto" class="title">{{'DELETE_ROOM.DELETE_ROOM' | translate}}</h3>
+  </div>
+  <div class="main_wrapper">
+    <div class="room_thumbnail" [ngStyle]="{'background-image': 'url(' + currentRoom.room_details.thumbnail + ')'}"></div>
+
+    <div class="right_zone_wrapper">
+      <span class="input_wrapp ">
+        {{'COMMON.TITLE' | translate}}:
+        <span dir="auto" class="text_field">{{currentRoom.room_details.room_name}}</span>
+      </span>
+
+      <div class="input_wrapp with_margin">
+        {{'COMMON.DESCRIPT' | translate}}:
+        <div dir="auto" class="text_field">{{currentRoom.room_details.room_desc}}</div>
+      </div>
+
+      <div class="input_wrapp with_margin">
+        {{'COMMON.ROOM_TYPE' | translate}}:
+        <div class="toggle_wrapper">
+          <span class="toggle_name">{{'COMMON.PUBLIC' | translate}}</span>
+          <input type="checkbox"  class="toggle_input" name="public"  [(ngModel)]="currentRoom.room_details.public"  hidden>
+          <span  class="toggle_field"></span>
+        </div>
+        <div class="toggle_wrapper">
+          <span class="toggle_name">{{'COMMON.SEARCHABLE' | translate}}</span>
+          <input type="checkbox"  class="toggle_input" name="searchable_flag" [(ngModel)]="currentRoom.room_details.searchable_flag"  hidden>
+          <span  class="toggle_field"></span>
+        </div>
+      </div>
+
+      <div class="buttons_wrapper">
+        <button type="button" class="form_button" [routerLink]="'/tifo-settings'">{{'COMMON.CANCEL' | translate}}</button>
+        <button type="button" class="form_button" (click)="deleteRoom()">{{'DELETE_ROOM.DELETE_ROOM' | translate}}</button>
+      </div>
+
+    </div>
+
+  </div>
+</div>

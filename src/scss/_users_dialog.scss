@@ -1,0 +1,198 @@
+:host{
+  flex: 1;
+  background: $line;
+  font-family: $font_medium;
+  width: 100%;
+  @extend .flex-column;
+}
+.main_container{
+  margin-top: 35px;
+  @extend .flex-default;
+  flex: 1;
+}
+.room_settings_header{
+  cursor: default;
+  position: relative;
+}
+.show_menu_label{
+  display: none;
+}
+.label_wrapp{
+  display: none;
+}
+.aside{
+  width: 350px;
+  @extend .flex-column;
+  margin-right: 10px;
+  position: relative;
+}
+.users_wrapper{
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 30px;
+  right: 0;
+}
+.user_bar{
+  height: 80px;
+  width: 100%;
+  border-radius: 5px;
+  background: white;
+  @extend .flex-center;
+  padding: 0 20px;
+  margin-bottom: 10px;
+  transition: 0.5s;
+  border-top: 1px solid $border_menu;
+  border-bottom: 1px solid $border_menu;
+  &:hover{
+    background: $blue;
+    .name,
+    .date,
+    .text{
+      color: white;
+    }
+  }
+}
+.avatar{
+  display: block;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  @extend .backgr-center;
+  background-color: $gray_text;
+  margin-right: 10px;
+  cursor: pointer;
+  background-size: contain;
+}
+.user_name_and_date{
+  font-family: $font_regular;
+}
+.top_wrapp{
+  @extend .flex-between;
+
+}
+.name{
+  font-size: 14px;
+  color: $dark_text;
+}
+.date{
+  font-size: 12px;
+  color: $gray_text;
+}
+.text{
+  color: $gray_text;
+  white-space: nowrap;
+  width: 265px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  pointer-events: none;
+}
+
+.active{
+  background: $blue;
+  .name,
+  .date,
+  .text{
+    color: white;
+  }
+}
+.new_message{
+  .name{
+    color: $blue;
+  }
+  .text{
+    color: $dark_text;
+    font-family: $font_bold;
+  }
+
+}
+.new_message.active{
+  .name{
+    color: white;
+  }
+  .text{
+    color: white;
+  }
+
+}
+.no_conversations{
+  border-radius: 5px;
+  border-top: 1px solid $border_menu;
+  border-bottom: 1px solid $border_menu;
+  color: $gray_text;
+  background: white;
+  height: 80px;
+  width: 100%;
+  @extend .flex-center;
+}
+
+
+
+@media screen and (max-width: 1000px){
+
+  .label_wrapp{
+    position: relative;
+    height: 0;
+    width: 100%;
+    display: block;
+    margin-bottom: 60px;
+  }
+  .show_menu_label{
+    height: 60px;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    cursor: pointer;
+  }
+  .outside{
+    color: white;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .inside{
+    margin-left: auto;
+    color: $blue;
+  }
+
+  .aside{
+    width: 300px;
+    position: fixed;
+    transform: translate3d(-100%, 0, 0);
+    left: 0;
+    transition: 0.5s;
+    top: 114px;
+    bottom: 30px;
+    background: white;
+    z-index: 2;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid transparent;
+    margin-right: 0;
+  }
+  .users_wrapper{
+    top: 60px;
+    bottom: 0;
+  }
+  .text{
+    width: 197px;
+  }
+  #users_list_view_toggler{
+    &:checked + .aside{
+      transform: translate3d(0, 0, 0);
+      border: 1px solid $border_menu;
+    }
+  }
+
+
+}
+
+@media screen and (max-width: 550px){
+
+  .aside{
+    top: 32px;
+    width: 100%;
+  }
+}

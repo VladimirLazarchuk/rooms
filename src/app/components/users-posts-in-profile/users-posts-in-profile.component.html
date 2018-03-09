@@ -1,0 +1,58 @@
+<div class="main_container" >
+
+  <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
+    <div class="post_info">
+                 <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
+                    <span class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span dir="auto" class="name">{{post.owner.user_name}}</span>
+                </span>
+      <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
+    </div>
+    <i class="line"></i>
+    <div class="post_body"     [routerLink]="['/tifo/' + post.room_alias + '/post/'+ post.post_id]">
+      <p dir="auto" class="post_text" *ngIf="post.text && post.text.length" [innerHTML]="post.text | asteriscReplace"></p>
+
+      <div class="post_images_wrapp " *ngIf="post.media.length"
+           [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
+
+        <div class="post_images" *ngFor="let img of post.media"
+             [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}" [ngClass]="{'icon-play-circle': img.type === 'video' || img.type === 'audio'}"></div>
+      </div>
+      <div class="post_images_wrapp post_with_1_picture" *ngIf="post.poll">
+        <div class="post_images poll_thumbnail"></div>
+      </div>
+
+      <div class="vote_info_wrapp"  *ngIf="post.poll">
+        <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} {{'COMMON.VOTES' | translate}}</span>
+        <span class="icon-calendar">{{post.poll.time_left*1000 | date:'d'}} {{'COMMON.DAYS_LEFT' | translate}}</span>
+      </div>
+
+
+    </div>
+
+    <div class="post_footer">
+      <div class="icons_wrapper">
+                <span class="icon-heart-o" [ngClass]="{'icon-heart': post.liked_by_user}"
+                      (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)">{{post.likes_count}}</span>
+        <span class="icon-bubble">{{post.comments_count}}</span>
+      </div>
+
+    </div>
+
+    <ul class="drop_down_menu"  *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
+
+      <li class="drop_down_item" (click)="removePost(post, i)">
+        <span class="drop_down_fill icon-cancel">{{'USER_MESSAGES.DELETE_POST' | translate}}</span>
+      </li>
+      <li class="for_dots">
+        <div class="dots_wrapp" (click)="post.menuOpened = !post.menuOpened">
+          <i class="dots icon-chevron-right"></i>
+          <i class="dots icon-chevron-right"></i>
+          <i class="dots icon-chevron-right"></i>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
+</div>

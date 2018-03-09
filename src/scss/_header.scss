@@ -1,0 +1,503 @@
+:host{
+margin-bottom: 60px;
+
+}
+.header{
+  width: 100%;
+  color: $gray_text;
+  background: white;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  position: fixed;
+  z-index: 4;
+  left: 0;
+  top: 0;
+  .main_container{
+    @extend .flex-between;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .main_container.safari_browser{
+    @extend .flex-between;
+    align-items: center;
+    -webkit-flex-wrap: wrap;
+  }
+  .logo{
+    height: 32px;
+    margin: 14px 0;
+    @extend .flex-center;
+    justify-content: flex-start;
+    position: relative;
+
+  }
+  .logo_link{
+    display: block;
+    width: 80px;
+    height: 100%;
+    background: left center no-repeat;
+    background-image: url("../../../img/Logo.png");
+    background-size: contain;
+  }
+  .header_link{
+    font-size: 16px;
+    color: $gray_text;
+    font-family: $font_bold;
+    transition: 0.3s;
+   @extend .flex-default;
+    align-items: flex-end;
+    margin-left: 10px;
+    cursor: pointer;
+    padding: 8px 10px;
+    line-height: 10px;
+    border-bottom: 2px solid transparent;
+    &:before{
+      font-size: 20px;
+      display: block;
+      margin-right: 8px;
+      line-height: 13px;
+    }
+    &:hover{
+      color: $blue;
+    }
+  }
+  .icon-binocular{
+    &:before{
+      font-size: 15px;
+    }
+  }
+  .search{
+    border-radius: 5px;
+    position: relative;
+    max-width: 350px;
+    flex: 1;
+    transition: 0.3s;
+    margin: 0 10px;
+  }
+
+  .search_field{
+    display: block;
+    width: 100%;
+    padding: 6px 45px 6px 10px;
+    background: $light_gray;
+    border: none;
+    border-radius: 5px;
+  }
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: $blue;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    color: $blue;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    color: $blue;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    color: $blue;
+  }
+  .icon-search{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 45px;
+    color: $blue;
+    @extend .flex-center;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  .icons_wrapper{
+    @extend .flex-center;
+    z-index: 1;
+    background: white;
+  }
+
+  .icon-bell-o,
+  .icon-mail{
+    height: 34px;
+    width: 34px;
+    @extend .flex-center;
+    background: $light_gray;
+    font-size: 25px;
+    color: $gray_text;
+    border-radius: 50%;
+    margin-right: 20px;
+    &:hover:before{
+      color: $blue;
+    }
+  }
+  .open_header{
+    height: 32px;
+    width: 100%;
+    padding-left: 80px;
+    background: left center no-repeat;
+    background-image: url("../../../img/Logo.png");
+    background-size: contain;
+    @extend .flex-center;
+    justify-content: flex-start;
+    display: none;
+    font-size: 20px;
+    transition: 0.5s;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    color: $gray_text;
+
+    border-radius: 0 0 5px 5px;
+    &:before{
+      transform: rotate(-90deg) scaleX(1);
+      transition: 0.5s;
+    }
+
+  }
+
+  .icon-bell-o{
+    &:before{
+      font-size: 20px;
+    }
+
+  }
+  .new_events{
+    background: $blue;
+    color: white;
+
+  }
+  .active{
+    color: $blue;
+    border-bottom: 2px solid $blue;
+  }
+
+
+  .user_info{
+    .drop_down_menu{
+      width: auto;
+      min-width: 110px;
+      max-width: 300px;
+      right: 0;
+      top: 46px;
+      left: auto;
+      z-index: 3;
+    }
+  }
+
+
+  .new_notifications,
+  .new_messages{
+    .drop_down_menu{
+      width: 300px;
+      position: absolute;
+      top: 47px;
+      left: -150px;
+    }
+    .triangle{
+      &:before{
+        left: 56%;
+      }
+      &:after{
+        left: 56%;
+      }
+    }
+  }
+  .new_notifications{
+    .text{
+      font-family: $font_regular;
+    }
+    .avatar{
+      cursor: default;
+    }
+    .user_bar{
+     cursor: default;
+      &:hover{
+        background: white;
+        .name{
+          color: $blue;
+        }
+        .text{
+          color: $dark_text;
+        }
+        .date{
+          color: $gray_text;
+        }
+      }
+    }
+  }
+
+
+
+  .drop_down_item{
+    border-top: none;
+  }
+  .messages_title{
+    @extend .flex-between;
+    align-items: center;
+  }
+  .messages_quantity{
+    font-size: 12px;
+  }
+  .see_all_messages{
+    width: 100%;
+    padding: 10px;
+    color: $blue;
+    font-family: $font_bold;
+    text-align: center;
+    list-style: none;
+  }
+
+  .user_bar{
+    height: 64px;
+    width: 100%;
+    background: white;
+    @extend .flex-center;
+    padding: 0 20px;
+    transition: 0.5s;
+    &:hover{
+      background: $blue;
+      .name,
+      .date,
+      .text{
+        color: white;
+      }
+    }
+  }
+  .avatar{
+    display: block;
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    @extend .backgr-center;
+    background-color: $gray_text;
+    margin-right: 10px;
+    cursor: pointer;
+    background-size: contain;
+  }
+  .user_name_and_date{
+    font-family: $font_regular;
+  }
+  .top_wrapp{
+    @extend .flex-between;
+
+  }
+  .name{
+    font-size: 14px;
+    color: $dark_text;
+    white-space: nowrap;
+    max-width: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .date{
+    font-size: 12px;
+    color: $gray_text;
+  }
+  .text{
+    color: $dark_text;
+    white-space: nowrap;
+    width: 215px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: $font_bold;
+  }
+.notification_data{
+  padding: 5px 0;
+  .name{
+    color: $blue;
+    line-height: 14px;
+    &:before{
+      margin-right: 10px;
+      display: inline-block;
+      line-height: 14px;
+    }
+  }
+  .text{
+    line-height: 16px;
+  }
+}
+  .back_wrapp{
+    display: none;
+  }
+
+}
+.select_wrapp{
+  @extend .flex-center;
+  margin-left: 20px;
+  span{
+    padding-bottom: 2px;
+  }
+}
+.lang_select{
+  border: none;
+  margin-left: 5px;
+}
+.reg_log_buttons{
+  padding: 5px 8px;
+  transition: 0.5s;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin: 0 5px;
+  &:hover{
+    color: $blue;
+    border-bottom: 2px solid $blue;
+  }
+}
+
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  /* STYLES IE11 */
+    .header{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+}
+
+@media screen and (max-width: 1000px){
+  :host{
+    margin-bottom: 114px;
+  }
+ .header{
+   .logo{
+     width: 100%;
+     &.safari_browser{
+       width: 1000px;
+     }
+   }
+   .search{
+     width: 50%;
+     margin: 0;
+   }
+   .icons_wrapper{
+     width: 50%;
+     padding: 10px;
+     justify-content: flex-end;
+   }
+   .new_notifications,
+   .new_messages{
+     .drop_down_menu{
+       top: 44px;
+     }
+   }
+   .user_info{
+     .drop_down_menu{
+       top: 43px;
+     }
+   }
+   .select_wrapp{
+     position: absolute;
+     transform: translateY(-55px);
+   }
+
+ }
+}
+
+@media screen and (max-width: 550px){
+  :host{
+    margin-bottom: 32px;
+  }
+  .header{
+    transform: translate3d(0, -100%, 0);
+    transition: 0.5s;
+  }
+  #header_opener:checked ~ .header{
+    transform: translate3d(0, 0, 0);
+  }
+  #header_opener:checked ~ .header .open_header {
+    &:before{
+      transform: rotate(-90deg) scaleX(-1);
+    }
+  }
+
+  .header{
+
+    .main_container{
+      flex-direction: column;
+    }
+    .logo{
+      margin: 10px auto;
+      width: auto;
+      background-image: none;
+      &.safari_browser{
+        width: auto;
+      }
+    }
+    .logo_link{
+      display: none;
+    }
+    .search{
+      width: 100%;
+    }
+    .select_wrapp{
+      display: none;
+    }
+    .icons_wrapper{
+      justify-content: center;
+      width: 100%;
+    }
+    .user_info{
+      .drop_down_menu{
+        right: -38%;
+      }
+    }
+    .open_header{
+      display: flex;
+      &:before{
+        transition: 0.5s;
+      }
+
+    }
+
+.icon-menu{
+  transform: translate3d(-75%, 44px, 0);
+  background: white;
+  border-radius: 0 0 5px 5px;
+  border: 1px solid $border_menu;
+}
+    .new_notifications,
+    .new_messages{
+      .drop_down_menu{
+        width: 275px;
+        left: -28px;
+      }
+      .triangle{
+        &:before{
+          left: 16%;
+        }
+        &:after{
+          left: 16%;
+        }
+      }
+      .text{
+        width: 190px;
+      }
+    }
+
+    .new_notifications{
+      .drop_down_menu{
+        left: -85px;
+      }
+      .triangle{
+        &:before{
+          left: 37%;
+        }
+        &:after{
+          left: 37%;
+        }
+      }
+    }
+
+
+    .header_link{
+      font-size: 12px;
+      padding: 5px;
+      margin-left: 5px;
+      &:before{
+        line-height: 12px;
+        font-size: 15px;
+      }
+    }
+    .icon-binocular{
+      &:before{
+        font-size: 11px;
+      }
+    }
+  }
+}

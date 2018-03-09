@@ -1,0 +1,90 @@
+:host{
+  width: 100%;
+  max-width: 800px;
+  //@extend .flex-column;
+  margin: 0 auto;
+}
+
+.title{
+  color: $blue;
+  font-family: $font_bold;
+  text-transform: capitalize;
+  font-size: 20px;
+}
+.walls{
+  width: 100%;
+  @extend .flex-column;
+}
+.form_button{
+  border: none;
+  background: $blue;
+  color: white;
+  font-family: $font_bold;
+  text-align: center;
+  padding: 10px 45px;
+  border-radius: 27px;
+  margin: 35px auto 0;
+  cursor: pointer;
+  display: block;
+  &:hover{
+    box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  }
+  &:active{
+    box-shadow: none;
+  }
+}
+.wall{
+  margin-top: 20px;
+  width: 100%;
+  height: 60px;
+  border-radius: 5px;
+  background: white;
+  @extend .flex-center;
+  justify-content: space-between;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  cursor: move;
+  &:before{
+    font-size: 25px;
+  }
+}
+
+.triangle{
+  &:before{
+    left: 86%;
+  }
+  &:after{
+    left: 86%;
+  }
+}
+.drop_down_menu{
+  z-index: 2;
+  left: -155px;
+  top: 25px;
+}
+.wall_name{
+  color: $blue;
+  font-size: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.buttons_wrapp{
+  @extend .flex-column;
+  width: 100%;
+}
+.action_button{
+  width: 100%;
+  border: none;
+  padding: 7px 15px;
+  color: $gray_text;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover{
+    color: white;
+    background: $blue;
+  }
+  &:last-child{
+    margin-top: 5px;
+  }
+}

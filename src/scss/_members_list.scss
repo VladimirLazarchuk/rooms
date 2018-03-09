@@ -1,0 +1,192 @@
+:host{
+  @extend .flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  max-height: 100%;
+}
+
+.radio_wrapp{
+  @extend .flex-center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 25px;
+}
+.radio{
+  @extend .flex-column;
+  align-items: center;
+  &:before{
+    height: 25px;
+    width: 25px;
+    background: white;
+    border: 1px solid $gray_text;
+    border-radius: 50%;
+    color: $blue;
+    @extend .flex-center;
+    content: '';
+  }
+}
+
+.member_types_toggler:checked + .radio{
+  &:before{
+    content: '\e90f';
+    border: 1px solid $blue;
+  }
+}
+.select{
+  width: 200px;
+  height: 35px;
+  border-radius: 5px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  border: 1px solid $gray_text;
+}
+.members{
+  @extend .flex-center;
+  flex-direction: column;
+  height: 210px;
+  width: 165px;
+  border-radius: 5px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  margin: 0 10px;
+  background: white;
+  position: relative;
+  margin-bottom: 20px;
+}
+.image{
+  height: 80px;
+  width: 80px;
+  display: block;
+  border-radius: 50%;
+  @extend .backgr-center;
+  background-size: contain;
+  cursor: pointer;
+}
+.user_name{
+  margin-top: 10px;
+}
+.close{
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  right: 0;
+  color: $gray_text;
+  &:hover{
+    color: $blue;
+  }
+}
+.approve{
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  left: 0;
+  color: $gray_text;
+  cursor: pointer;
+  &:hover{
+    color: $blue;
+  }
+  &:before{
+    font-size: 24px;
+
+  }
+}
+.dropdown_wrapp{
+  position: absolute;
+
+  top: 0;
+  right: 0;
+}
+.drop_down_container{
+  padding: 10px;
+}
+.drop_down_menu{
+  top: 95%;
+  left: -111px;
+  width: 165px;
+}
+//.drop_down_title{
+//  padding: 8px;
+//  font-size: 15px;
+//  &:hover{
+//    color: white!important;
+//  }
+//  &:before{
+//    left: 84%;
+//  }
+//}
+.triangle{
+  &:before{
+    left: 84%;
+  }
+  &:after{
+    left: 84%;
+  }
+}
+.drop_down_item{
+  padding: 7px;
+  font-size: 12px;
+  transition: 0.3s;
+  &:hover{
+    background: $blue;
+    color: white;
+  }
+}
+.add_button{
+  height: 35px;
+  border-radius: 5px;
+  background: $blue;
+  color: white;
+  padding: 0 10px;
+  border: none;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+  line-height: 35px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.user_search_field{
+  padding: 4px 10px;
+  border: 1px solid $gray_text;
+  border-radius: 5px;
+  width: 50%;
+  margin-left: 20px;
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 768px){
+  :host{
+    justify-content: space-around;
+  }
+  .select{
+    margin-right: 20px;
+  }
+  .user_search_field{
+    margin-left: 0;
+    flex: 1;
+  }
+
+}
+
+@media screen and (max-width: 550px){
+  .radio_wrapp{
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+  .select{
+    margin-right: 0;
+    width: 100%;
+  }
+  .user_search_field{
+    margin-top: 20px;
+    flex: auto;
+    width: 100%;
+  }
+  .add_button{
+    margin-top: 20px;
+  }
+
+
+}
+
+@media screen and (max-width: 430px){
+
+
+}

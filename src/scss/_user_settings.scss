@@ -1,0 +1,125 @@
+:host{
+  flex: 1;
+  background: $line;
+  font-family: $font_medium;
+  width: 100%;
+  position: relative;
+}
+.room_settings_header{
+  cursor: default;
+  position: relative;
+}
+.main_container{
+  @extend .flex-start;
+  align-items: flex-start;
+  margin-top: 35px;
+  overflow-y: auto;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.label_wrapp{
+  position: relative;
+  width: 100%;
+}
+.show_menu_label{
+  height: 60px;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  cursor: pointer;
+}
+.outside{
+  color: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.inside{
+  margin-left: auto;
+  color: $blue;
+}
+
+.aside{
+  width: 200px;
+  position: fixed;
+  transform: translate3d(-100%, 0, 0);
+  left: 0;
+  transition: 0.5s;
+  top: 60px;
+  bottom: 0;
+  background: white;
+  padding-left: 20px;
+  z-index: 3;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid transparent;
+}
+#navigation_menu_toggle{
+  &:checked + .aside{
+    transform: translate3d(0, 0, 0);
+    border: 1px solid $border_menu;
+  }
+  &:checked ~ .main_field{
+    margin-left: 184px;
+  }
+}
+.aside_items{
+  list-style: none;
+  color: $dark_text;
+  font-size: 16px;
+  padding: 8px 0;
+  cursor: pointer;
+  &:hover{
+    color: $blue;
+  }
+}
+.aside_items_title{
+  text-transform: uppercase;
+  color: $gray_text;
+  margin-top: 20px;
+  cursor: default;
+  &:hover{
+    color: $gray_text;
+  }
+  &:first-child{
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+.active{
+  color: $blue;
+  font-family: $font_bold;
+}
+.main_field{
+  @extend .flex-column;
+  align-items: center;
+  width: 100%;
+  transition: 0.5s;
+}
+
+@media screen and (max-width: 1000px){
+  .main_container{
+    flex-direction: column;
+    margin-top: 32px;
+  }
+  #navigation_menu_toggle{
+
+    &:checked ~ .main_field{
+      margin-left: 0;
+    }
+  }
+  .aside{
+    top: 114px;
+  }
+}
+
+@media screen and (max-width: 550px){
+  .aside{
+    top: 32px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,176 @@
+<router-outlet></router-outlet>
+<div class="component_wrapp" #scrollArea appIeHeight appScroolEnd (scrollRichTheEnd)="onScrollRichTheEnd($event)" (scrollAction)="onScrollAction($event)" *ngIf="without_child_route">
+
+
+<div class="name_and_menu" *ngIf="roomData">
+    <div class="string_wrapp">
+        <div class="left_position">
+
+            <label for="show_hide_filter" class="icon-filter"></label>
+            <input type="checkbox" id="show_hide_filter" [(ngModel)]="show_hide_toggle" hidden>
+            <div class="filter_wrapp">
+
+
+                <select class="filter_switcher"  [(ngModel)]="filter_switcher" (change)="doFilteringResults(filter_switcher)">
+                    <option value="show_all">X</option>
+                    <option value="faves">{{'INSIDE_ROOM.FAVES_USES' | translate}}</option>
+                    <option value="search_term">{{'INSIDE_ROOM.BY_TEXT' | translate}}</option>
+                    <option value="user_name_post">{{'INSIDE_ROOM.BY_NAME' | translate}}</option>
+                </select>
+                <div class="search_wrapp" *ngIf="filter_switcher === 'search_term' || filter_switcher === 'user_name_post'">
+                    <input type="text" dir="auto" class="posts_search" [(ngModel)]="posts_search">
+                    <i class="icon-search" (click)="doSearch(posts_search)"></i>
+                </div>
+            </div>
+        </div>
+
+        <ul class="posts_menu" >
+            <li class="posts_menu_items icon-gear" *ngIf="roomData && roomData.membership.member && roomData.is_admin" [routerLink]="'/tifo-settings'">{{'INSIDE_ROOM.SETTINGS' | translate}}</li>
+            <li class="posts_menu_items icon-question" [routerLink]="'./about'">{{'INSIDE_ROOM.ABOUT' | translate}}</li>
+            <li class="posts_menu_items icon-room-in" *ngIf="roomData && !roomData.membership.member" (click)="interractWithUser('join')">{{'INSIDE_ROOM.JOIN' | translate}}</li>
+            <li class="posts_menu_items icon-room-out" *ngIf="roomData && roomData.membership.member" (click)="interractWithUser('leave')">{{'INSIDE_ROOM.LEAVE' | translate}}</li>
+        </ul>
+    </div>
+
+    <span dir="auto" class="room_name">{{roomData && roomData.room_details.room_name}}</span>
+</div>
+
+
+
+<div class="room_tags" >
+    <div class="tags_container">
+         <span class="room_tag" *ngFor="let tag of roomTags" [ngClass]="{'tags__active': tag.wall_id === wallId}"
+               (click)="goToAnotherWall(tag, tag.wall_id !== wallId)">{{tag.wall_name}}</span>
+    </div>
+
+</div>
+
+
+<div class="main_container" >
+
+    <div class="posts" *ngFor="let post of allPosts; let i = index" [ngClass]="{'with_opened_menu': post.menuOpened}" >
+        <div class="post_info">
+                 <span class="user_info" [routerLink]="['/about-user', post.owner.user_id*22]">
+                    <span dir="auto" class="avatar" [ngStyle]="post.owner.thumbnail && {'background-image':'url(' + post.owner.thumbnail + ')' }"></span>
+                    <span dir="auto" class="name">{{post.owner.user_name}}</span>
+                </span>
+            <span class="date">{{post.created_at * 1000 | date: 'dd MMM y'}}</span>
+        </div>
+        <i class="line"></i>
+        <div class="post_body"   [routerLink]="['./post', post.post_id]">
+            <p class="post_text" dir="auto" [ngClass]="{'no_media_in_post': !post.poll && !post.media.length}" *ngIf="post.text && post.text.length" [innerHTML]="post.text | asteriscReplace"></p>
+
+            <div class="post_images_wrapp " *ngIf="post.media.length"
+                 [ngClass]="{'post_with_3_picture': post.media.length == 3, 'post_with_2_picture': post.media.length == 2, 'post_with_1_picture': post.media.length == 1}">
+
+                <div class="post_images" *ngFor="let img of post.media"
+                     [ngStyle]="{'background-image': 'url(' + img.thumbnail + ')'}" [ngClass]="{'icon-video-not-font': img.type === 'video', 'icon-audio-not-font': img.type === 'audio', 'icon-pdf-not-font': img.type === 'pdf'}"></div>
+            </div>
+            <div class="post_images_wrapp post_with_1_picture" *ngIf="post.poll">
+                <div class="post_images poll_thumbnail"></div>
+            </div>
+
+            <div class="vote_info_wrapp"  *ngIf="post.poll">
+                <span class="icon-square-check">{{post.poll.choice1total + post.poll.choice2total + post.poll.choice3total + post.poll.choice4total}} {{'COMMON.VOTES' | translate}}</span>
+                <span class="icon-calendar">{{post | pollTimeLeft}}</span>
+            </div>
+
+
+        </div>
+
+        <div class="post_footer">
+            <div class="icons_wrapper">
+                <span class="icon-heart-o" [ngClass]="{'icon-heart': post.liked_by_user}"
+                      (click)="likeAndUnlikePost(post.post_id, post.liked_by_user, post)">{{post.likes_count}}</span>
+                <span class="icon-bubble">{{post.comments_count}}</span>
+            </div>
+        </div>
+
+
+        <ul class="drop_down_menu" (mouseleave)="onMouseLeave( post)" >
+            <!--all done-->
+            <li class="drop_down_item"
+                (click)="postOwnerInterraction('mute', post.owner.user_id)"
+                *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
+                <span class="drop_down_fill icon-mute">{{'COMMON.MUTE_USER' | translate}}</span>
+            </li>
+            <!--all done-->
+            <li class="drop_down_item"
+                (click)="postOwnerInterraction('block', post.owner.user_id)"
+                *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">
+
+                <span class="drop_down_fill icon-eye-blocked">{{'COMMON.BLOCK_USER' | translate}}</span>
+            </li>
+
+            <!--all done-->
+            <li class="drop_down_item" (click)="postInterraction('edite',  post, i)"
+                *ngIf="currentUserData.user_data.user_id === post.owner.user_id">
+
+                <span class="drop_down_fill icon-pencil">{{'INSIDE_ROOM.EDIT_USER' | translate}}</span>
+            </li>
+            <!--all done-->
+            <li class="drop_down_item comm_block_with_select"
+                *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && userArmin">
+                <span class="drop_down_fill icon-ban" (click)="postInterraction('ban', post)">{{'COMMON.BAN_USER' | translate}}</span>
+
+
+                <select name="ban_days" class="ban-days" [(ngModel)]="banDays"
+                        *ngIf="post.bunned"
+                        (change)="postInterraction('do_ban', post, i, banDays)">
+                    <option value="0" selected disabled>{{'COMMON.DAYS_FOR_BAN' | translate}}</option>
+                    <option value="3">3 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="7">7 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="14">14 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="30">30 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="60">60 {{'COMMON.DAYS' | translate}}</option>
+                    <option value="3000">3000 {{'COMMON.DAYS' | translate}}</option>
+                </select>
+            </li>
+            <!--all done-->
+            <li class="drop_down_item comm_block_with_select" *ngIf="userArmin">
+                <div class="comm__icon-pos list_item_with_select"
+                     (click)="postInterraction('move', post)">
+                    <span class="drop_down_fill icon-move-right">{{'INSIDE_ROOM.MOVE_POST' | translate}}</span>
+
+                </div>
+                <select name="move_to" class="ban-days" [(ngModel)]="wallsIds"
+                        *ngIf="post.movedTo"
+                        (change)="postInterraction('do_move', post, i, wallsIds)">
+                    <option *ngFor="let wall of roomTags" [ngValue]="wall.wall_id">
+                        {{wall.wall_name}}
+                    </option>
+                </select>
+            </li>
+            <!--all done-->
+            <li class="drop_down_item" (click)="postInterraction('remove', post, i)"
+                *ngIf="currentUserData.user_data.user_id === post.owner.user_id || userArmin">
+
+                <span class="drop_down_fill icon-cancel" *ngIf="currentUserData.user_data.user_id === post.owner.user_id">{{'INSIDE_ROOM.DELETE_POST' | translate}}</span>
+                <span class="drop_down_fill icon-cancel" *ngIf="currentUserData.user_data.user_id !== post.owner.user_id">{{ 'INSIDE_ROOM.REMOVE_POST' | translate}}</span>
+            </li>
+            <!--all done-->
+            <li class="drop_down_item" (click)="postInterraction('inappropriate', post)"
+                *ngIf="currentUserData.user_data.user_id !== post.owner.user_id && !userArmin">
+
+                <span class="drop_down_fill icon-flag">{{'COMMON.INAPPROPRIATE' | translate}}</span>
+            </li>
+            <li class="for_dots">
+                <div class="dots_wrapp" (click)="post.menuOpened = !post.menuOpened">
+                    <i class="dots"></i>
+                    <i class="dots"></i>
+                    <i class="dots"></i>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+    <span class="add_post icon-plus" (click)="openNewPostModal()" *ngIf="membership && currentWall"
+          [ngClass]="{'disabled': !currentWall.allow_post_flag && !membership.moderator && !membership.supermoderator && !membership.admin && !membership.talker || !membership.member || membership.banned}"></span>
+
+    <span class="to_top icon-chevron-left" *ngIf="show_to_top" (click)="scrollToTopFunction()"></span>
+
+    <span class="loading" *ngIf="show_loading">{{'COMMON.LOADING' | translate}}</span>
+</div>
+
+</div>
